@@ -48,15 +48,15 @@ app.get("/fetch", async (req, res) => {
 
 ///////////////////
 
-const mongoose = require("mongoose");
-mongoose.connect(process.env.MONGODB_URI);
+// const mongoose = require("mongoose");
+// mongoose.connect(process.env.MONGODB_URI);
 
-app.post("/", async (req, res) => {
-  return res.status(200).json("hello");
-});
+// app.post("/", async (req, res) => {
+//   return res.status(200).json("hello");
+// });
 
 app.all("*", (req, res) => {
-  return res.status(401).json("You shouldn't be here...");
+  return res.status(401).json("Nothing to see here...");
 });
 
 app.listen(process.env.PORT || 3200, () => {
