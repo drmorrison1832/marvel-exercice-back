@@ -59,6 +59,6 @@ app.all("*", (req, res) => {
   return res.status(401).json("You shouldn't be here...");
 });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3200, () => {
   console.log("Serveur started");
 });
