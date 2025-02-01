@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 // mongoose.connect(process.env.MONGODB_URI);
 
-const User = require("./User-model");
+const User = require("../models/User");
 
 async function isAuthorized(req, res, then) {
   console.warn("isAuthorized?");

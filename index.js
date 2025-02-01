@@ -89,8 +89,7 @@ const userSchema = new mongoose.Schema({
   saved: { comics: Array, characters: Array },
 });
 
-// const User = mongoose.model("User", userSchema);
-const User = require("./utils/User-model");
+const User = require("./models/User");
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -109,15 +108,16 @@ app.post("/signup", async (req, res) => {
     let newUser = new User();
     const newSalt = uuidv4();
     newUser.username = req.body.username;
+
     newUser.salt = newSalt;
     newUser.hash = SHA256(req.body.password + newSalt).toString(encBase64);
     newUser.token = uuidv4();
 
-    let response = await newUser.save();
+    const response = await newUser.save();
 
     return res.status(201).json({
       message: `Welcome, ${response.username}`,
-      username: userQuery.username,
+      username: response.username,
       token: response.token,
     });
   } catch (error) {
@@ -224,33 +224,3 @@ app.all("*", (req, res) => {
 app.listen(process.env.PORT || 3200, () => {
   console.log("Serveur started");
 });
-
-// app.get("/", async (req, res) => {
-//   const { request, characterID, comicID, title, name, limit, page, skip } =
-//     req.body;
-//   let response;
-//   try {
-//     switch (request) {
-//       case "comics":
-//         response = await getComics(req.query);
-//         break;
-//       case "comicById":
-//         response = await getComicByID(comicID);
-//         break;
-//       case "comicByCharacter":
-//         response = await getComicsByCharacterID(characterID);
-//       case "characters":
-//         response = await getCharacters(name, limit, skip);
-//         break;
-//       case "characterByID":
-//         console.log("Request: characteirByID");
-//         response = await getCharacterByID(characterID);
-//         break;
-//       default:
-//         throw new Error("Wrong request");
-//     }
-//     return res.status(200).json(response.data);
-//   } catch (error) {
-//     return res.status(500).json({ message: error.message });
-//   }
-// });
