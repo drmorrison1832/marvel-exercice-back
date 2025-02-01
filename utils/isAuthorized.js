@@ -1,7 +1,3 @@
-const mongoose = require("mongoose");
-
-// mongoose.connect(process.env.MONGODB_URI);
-
 const User = require("../models/User");
 
 async function isAuthorized(req, res, then) {
@@ -19,7 +15,7 @@ async function isAuthorized(req, res, then) {
     });
 
     if (!userQuery) {
-      throw new Error("Unauthorized");
+      return res.status(401).json({ message: "Unauthorized" });
     }
 
     console.log("User is", userQuery.username);
