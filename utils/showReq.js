@@ -1,19 +1,19 @@
 function showReq(req, res, then) {
-  console.warn("🔹 ShowReq");
-
-  console.warn(req.method + ":", req.url);
+  console.warn("🔹ShowReq ———————————————————————————————————————————");
+  console.warn("Route is:", req.method + ":", req.url);
 
   req.headers.authorization &&
     console.log(
-      " headers.authorization (token):",
+      "headers.authorization (token):",
       req.headers.authorization.replace("Bearer ", "")
     );
 
-  req.params && console.log(" Params:", req.params);
-  req.query && console.log(" Query:", req.query);
-  req.body && console.log(" Body:", req.body);
-  req.files && console.log(" Files:", req.files);
+  req.params && console.log("Params:", req.params);
+  req.query && console.log("Query:", req.query);
+  req.body && console.log("Body:", req.body);
+  req.files && console.log("Files:", req.files);
 
+  console.warn("—————————————————————————————————————————————————————");
   then();
 }
 
