@@ -28,6 +28,7 @@ app.use(saveRoutes);
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 app.all("*", (req, res) => {
+  console.log("Unknown route");
   return res.status(401).json("Nothing to see here...");
 });
 

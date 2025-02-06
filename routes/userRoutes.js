@@ -8,7 +8,7 @@ const encBase64 = require("crypto-js/enc-base64");
 const User = require("../models/User");
 
 router.post("/user/signup", async (req, res) => {
-  console.log(`🔹 Requested route: /signup`);
+  console.log(`🔹 Requested route: user/signup`);
   try {
     const userQuery = await User.findOne({ username: req.body.username });
     if (userQuery) {
@@ -35,27 +35,31 @@ router.post("/user/signup", async (req, res) => {
   }
 });
 
-router.get("/user/login", async (req, res) => {
-  console.log(`🔹 Requested route: /login`);
+router.post("/user/login", async (req, res) => {
+  console.log(`🔹 Requested route: user/login`);
 
   try {
     const userQuery = await User.findOne({ username: req.body.username });
 
     if (!userQuery) {
+      console.log("User not found");
       return res.status(401).json({ message: "Wrong user or password" });
     }
+    console.log("User found");
 
     let visitorHash = SHA256(req.body.password + userQuery.salt).toString(
       encBase64
     );
 
     if (visitorHash === userQuery.hash) {
+      console.log("Password is correct");
       return res.status(200).json({
         message: `Welcome back, ${userQuery.username}`,
         username: userQuery.username,
         token: userQuery.token,
       });
     } else {
+      console.log("Wrong password");
       return res.status(401).json({ message: "Wrong user or password" });
     }
   } catch (error) {
