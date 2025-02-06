@@ -7,7 +7,7 @@ const encBase64 = require("crypto-js/enc-base64");
 
 const User = require("../models/User");
 
-router.post("/signup", async (req, res) => {
+router.post("/user/signup", async (req, res) => {
   console.log(`🔹 Requested route: /signup`);
   try {
     const userQuery = await User.findOne({ username: req.body.username });
@@ -35,7 +35,7 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-router.get("/login", async (req, res) => {
+router.get("/user/login", async (req, res) => {
   console.log(`🔹 Requested route: /login`);
 
   try {
