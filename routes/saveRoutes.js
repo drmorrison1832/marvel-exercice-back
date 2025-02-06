@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const isAuthorized = require("../utils/isAuthorized");
-router.use(isAuthorized);
+// router.use(isAuthorized); // Ça s'applique à toutes les routes...
 
-router.put("/save", async (req, res) => {
+router.put("/save", isAuthorized, async (req, res) => {
   console.log(`🔹 Requested route: /save`);
   const user = req.user;
 
@@ -36,13 +36,13 @@ router.put("/save", async (req, res) => {
   }
 });
 
-router.get("/saved", async (req, res) => {
+router.get("/saved", isAuthorized, async (req, res) => {
   console.log(`🔹 Requested route: /saved`);
   const user = req.user;
   return res.status(200).json(user.saved);
 });
 
-router.delete("/unsave", async (req, res) => {
+router.delete("/unsave", isAuthorized, async (req, res) => {
   console.log(`🔹 Requested route: /unsave`);
   const user = req.user;
 

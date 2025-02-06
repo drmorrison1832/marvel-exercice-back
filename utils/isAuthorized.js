@@ -4,6 +4,7 @@ async function isAuthorized(req, res, then) {
   console.warn("isAuthorized?");
 
   if (!req?.headers?.authorization) {
+    console.log("Missing username or password");
     return res.status(401).json({ message: "Unauthorized" });
   }
 
