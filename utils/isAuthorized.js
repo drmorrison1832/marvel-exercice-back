@@ -4,11 +4,13 @@ async function isAuthorized(req, res, then) {
   console.warn("isAuthorized?");
 
   if (!req?.headers?.authorization) {
-    console.log("Missing username or password");
+    console.log("Missing token");
+    console.log("Headers are", req?.headers.authorization);
     return res.status(401).json({ message: "Unauthorized" });
   }
 
   const visitorToken = req.headers.authorization.replace("Bearer ", "");
+  // console.log(visitorToken);
 
   try {
     const userQuery = await User.findOne({

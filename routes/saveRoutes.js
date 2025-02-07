@@ -8,6 +8,7 @@ router.put("/saved", isAuthorized, async (req, res) => {
   const user = req.user;
 
   if (!req.body.comic && !req.body.character) {
+    console.log("Nothing to put");
     return res.status(400).json({ message: "Nothing to put" });
   }
 
@@ -29,6 +30,7 @@ router.put("/saved", isAuthorized, async (req, res) => {
 
   try {
     let response = await user.save();
+    console.log("Item saved");
     return res.status(200).json(response.saved);
   } catch (error) {
     console.error(error.message);
