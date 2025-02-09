@@ -38,6 +38,7 @@ async function getComics(query) {
 // Get comic by Comic ID
 async function getComicByID(params) {
   console.log("🔹 Retrieving comic by ID...");
+  console.log("ID is", params.comicID);
 
   const comicID = params.comicID || "";
 
@@ -56,6 +57,8 @@ async function getComicByID(params) {
 // Get comics by Character ID
 async function getComicsByCharacterID(params) {
   console.log("🔹 Retrieving comics by character ID...");
+  console.log("ID is", params.characterID);
+
   const characterID = params.characterID || "";
 
   try {
@@ -106,6 +109,8 @@ async function getCharacters(query) {
 // Get character by ID
 async function getCharacterByID(params) {
   console.log("🔹 Retrieving character by ID...");
+  console.log("ID is", params.characterID);
+
   const characterID = params.characterID || "";
   try {
     const response = await axios.get(
@@ -115,7 +120,7 @@ async function getCharacterByID(params) {
     return response;
   } catch (error) {
     console.error(error.message);
-    throw error;
+    throw new Error("Unable to retrieve character");
   }
 }
 

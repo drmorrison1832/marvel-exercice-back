@@ -10,7 +10,6 @@ async function isAuthorized(req, res, then) {
   }
 
   const visitorToken = req.headers.authorization.replace("Bearer ", "");
-  // console.log(visitorToken);
 
   try {
     const userQuery = await User.findOne({

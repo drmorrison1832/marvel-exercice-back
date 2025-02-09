@@ -21,12 +21,6 @@ app.use(userRoutes);
 const saveRoutes = require("./routes/saveRoutes");
 app.use(saveRoutes);
 
-////////////////////////////////////////////////////////////////////////////////////////////////
-//
-// Faire en sorte que si je décide de créer un compte, ça copie mon Local Storage sur mon compte.
-//
-////////////////////////////////////////////////////////////////////////////////////////////////
-
 app.all("*", (req, res) => {
   console.log("Unknown route");
   return res.status(401).json("Nothing to see here...");
